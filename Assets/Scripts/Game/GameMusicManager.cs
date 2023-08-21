@@ -4,16 +4,38 @@ using UnityEngine;
 
 public class GameMusicManager : MonoBehaviour
 {
-    //TODO Testing music loop
-
     [SerializeField] private AudioSource _audioSource;
-    [SerializeField] private AudioClip _audioStart;
+
+    //This should be a dictionary but whatever
+    [SerializeField] private AudioClip _normalMusic;
+    [SerializeField] private AudioClip _hardMusic;
+    [SerializeField] private AudioClip _ultimateMusicLoop;
+    [SerializeField] private AudioClip _ultimateMusicStart;
 
     private const float LOOP_START_OFFSET = -0.15f;
 
     private void Start()
     {
-        _audioSource.PlayOneShot(_audioStart);
-        _audioSource.PlayScheduled(AudioSettings.dspTime + _audioStart.length + LOOP_START_OFFSET);    
+        switch (PlayerPrefs.GetInt("Difficulty"))
+        {
+            case (int) Consts.DIFFICULTIES.NORMAL:
+                _audioSource.clip = _normalMusic;
+                _audioSource.Play();
+                break;
+
+            case (int) Consts.DIFFICULTIES.HARD:
+                _audioSource.clip = _hardMusic;
+                _audioSource.Play();
+                break;
+
+            case (int) Consts.DIFFICULTIES.ULTIMATE:
+                _audioSource.clip = _ultimateMusicLoop;
+                _audioSource.PlayOneShot(_ultimateMusicStart);
+                _audioSource.PlayScheduled(AudioSettings.dspTime + _ultimateMusicStart.length + LOOP_START_OFFSET);
+                break;
+
+            default:
+                return;
+        }  
     }
 }
