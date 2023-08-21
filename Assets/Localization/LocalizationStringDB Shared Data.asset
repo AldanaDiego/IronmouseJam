@@ -27,6 +27,22 @@ MonoBehaviour:
     m_Key: TITLE_BUTTON_SETTINGS
     m_Metadata:
       m_Items: []
+  - m_Id: 557490814410752
+    m_Key: TITLE_DIFFICULTY_NORMAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557565833732096
+    m_Key: TITLE_DIFFICULTY_HARD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557631902408704
+    m_Key: TITLE_DIFFICULTY_ULTIMATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557712630177792
+    m_Key: TITLE_BUTTON_BACK
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -30,6 +30,22 @@ MonoBehaviour:
     m_Localized: Opciones
     m_Metadata:
       m_Items: []
+  - m_Id: 557490814410752
+    m_Localized: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557565833732096
+    m_Localized: "Dif\xEDcil"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557631902408704
+    m_Localized: Gamer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 557712630177792
+    m_Localized: Volver
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
