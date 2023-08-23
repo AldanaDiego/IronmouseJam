@@ -10,6 +10,9 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 ### Prop Models
 - [POLYDesert](https://assetstore.unity.com/packages/3d/environments/landscapes/polydesert-107196) by Runemark Studio
 
+### Animations
+- [Warrior Pack Bundle 1 FREE](https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-1-free-36405) by Explosive
+
 ### Art
 - [Free Horizontal Game Backgrounds](https://free-game-assets.itch.io/free-horizontal-game-backgrounds) by Free Game Assets (GUI, Sprite, Tilesets)
 
