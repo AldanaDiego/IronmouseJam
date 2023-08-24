@@ -7,6 +7,7 @@ public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     private InputManager _inputManager;
+    private StageProgress _stageProgress;
     private Transform _transform;
     private Vector3 _defaultPosition;
     private const float JUMP_TIME = 1.2f;
@@ -14,6 +15,7 @@ public class PlayerJump : MonoBehaviour
     private const float JUMP_COOLDOWN = 0.2f;
     private bool _isJumping = false;
     private bool _isCooldown = false;
+    private bool _canJump = true;
     private float _jumpTimer;
     private float _cooldownTimer;
 
@@ -23,6 +25,8 @@ public class PlayerJump : MonoBehaviour
         _defaultPosition = _transform.localPosition;
         _inputManager = InputManager.GetInstance();
         _inputManager.OnOkActionPerformed += OnOkActionPerformed;
+        _stageProgress = StageProgress.GetInstance();
+        _stageProgress.OnStageClear += OnStageClear;
     }
 
     private void Update()
@@ -59,11 +63,16 @@ public class PlayerJump : MonoBehaviour
 
     private void OnOkActionPerformed(object sender, EventArgs empty)
     {
-        if (!_isJumping && !_isCooldown)
+        if (_canJump && !_isJumping && !_isCooldown)
         {
             _animator.SetTrigger("Jump");
             _jumpTimer = 0f;
             _isJumping = true;
         }
+    }
+
+    private void OnStageClear(object sender, EventArgs empty)
+    {
+        _canJump = false;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class RockObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private RockObstacle _rockPrefab;
 
+    private StageProgress _stageProgress;
     private float _upperBound;
     private float _lowerBound;
     private float _leftBound;
@@ -21,6 +23,8 @@ public class RockObstacleSpawner : MonoBehaviour
         _lowerBound = bounds.y * -1;
         _leftBound = (bounds.x * -1) - 2f;
         _isActive = true;
+        _stageProgress = StageProgress.GetInstance();
+        _stageProgress.OnStageClear += OnStageClear;
     }
 
     private void Update()
@@ -35,7 +39,7 @@ public class RockObstacleSpawner : MonoBehaviour
                     new Vector3(
                         _spawnPosition,
                         0f,
-                        Mathf.RoundToInt(Random.Range(_lowerBound, _upperBound))
+                        Mathf.RoundToInt(UnityEngine.Random.Range(_lowerBound, _upperBound))
                     ),
                     Quaternion.identity
                 );
@@ -43,5 +47,10 @@ public class RockObstacleSpawner : MonoBehaviour
                 _cooldownTimer = 0f;
             }
         }    
+    }
+
+    private void OnStageClear(object sender, EventArgs empty)
+    {
+        _isActive = false;
     }
 }

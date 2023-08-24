@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private const float MOVEMENT_SPEED = 8f;
     
     private InputManager _inputManager;
+    private StageProgress _stageProgress;
     private Transform _transform;
     private bool _canMove = true;
     private float _movementBoundHorizontal;
@@ -19,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 bounds = GameBounds.GetInstance().GetScreenBounds();
         _movementBoundHorizontal = bounds.x * 0.6f;
         _movementBoundVertical = bounds.y;
+        _stageProgress = StageProgress.GetInstance();
+        _stageProgress.OnStageClear += OnStageClear;
     }
 
     private void Update()
@@ -38,4 +42,20 @@ public class PlayerMovement : MonoBehaviour
         }    
     }
 
+    private IEnumerator MoveAway()
+    {
+        yield return new WaitForSeconds(2.5f);
+        float leaveBound = (_movementBoundHorizontal / 0.6f) + 3f;
+        while (_transform.position.x <= leaveBound)
+        {
+            _transform.position += Vector3.right * (MOVEMENT_SPEED * Time.deltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private void OnStageClear(object sender, EventArgs empty)
+    {
+        _canMove = false;
+        StartCoroutine(MoveAway());
+    }
 }
