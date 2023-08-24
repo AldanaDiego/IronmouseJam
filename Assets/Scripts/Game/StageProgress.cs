@@ -13,7 +13,7 @@ public class StageProgress : Singleton<StageProgress>
     public event EventHandler OnStageDeath;
 
     private const float STAGE_RESTART_TIME = 3f;
-    private float _stageTotalTime = 15f; //TODO depends on difficulty
+    private float _stageTotalTime = 25f; //TODO depends on difficulty
     private float _stageTimer;
     private bool _isActive;
 

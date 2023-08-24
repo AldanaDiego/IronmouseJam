@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCollision: {fileID: 1537684964916117079}
+  _animator: {fileID: 8353332569274051098}
+  _playerTransform: {fileID: 2669741098179113056}
 --- !u!1001 &1574012398323636796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -553,6 +555,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: e1ba96770f9afac45b7c4a917a9985e1, type: 2}
+    - target: {fileID: 5866666021909216657, guid: 8b34ad003b495cc4dbc4a5856029cf23,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7036213049465896255, guid: 8b34ad003b495cc4dbc4a5856029cf23,
         type: 3}
       propertyPath: m_Layer
@@ -622,7 +629,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 1.25, z: 0.5}
+  m_Size: {x: 0.5, y: 1.25, z: 0.55}
   m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!114 &1537684964916117079
 MonoBehaviour:

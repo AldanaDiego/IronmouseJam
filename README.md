@@ -12,6 +12,7 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 
 ### Animations
 - [Warrior Pack Bundle 1 FREE](https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-1-free-36405) by Explosive
+- [RPG Character Mecanim Animation Pack FREE](https://assetstore.unity.com/packages/3d/animations/rpg-character-mecanim-animation-pack-free-65284) by Explosive
 
 ### Art
 - [Free Horizontal Game Backgrounds](https://free-game-assets.itch.io/free-horizontal-game-backgrounds) by Free Game Assets (GUI, Sprite, Tilesets)

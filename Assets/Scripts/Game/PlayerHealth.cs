@@ -6,10 +6,13 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private PlayerCollision _playerCollision;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _playerTransform;
 
     public event EventHandler OnPlayerDeath;
 
     private StageProgress _stageProgress;
+    private Vector3 _originalPosition;
     private const int MAX_HEALTH = 3;
     private int _health;
     private bool _canBeDamaged;
@@ -22,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
         _stageProgress.OnStageClear += OnStageClear;
         _stageProgress.OnStageRestart += OnStageRestart;
         _canBeDamaged = true;
+        _originalPosition = _playerTransform.localPosition;
     }
 
     private void OnPlayerCollision(object sender, EventArgs empty)
@@ -31,10 +35,36 @@ public class PlayerHealth : MonoBehaviour
             _health--;
             if (_health <= 0)
             {
-                Debug.Log($"You died lul");
+                StartCoroutine(DeathAnimation());
                 _canBeDamaged = false;
                 OnPlayerDeath?.Invoke(this, EventArgs.Empty);
             }
+            else
+            {
+                _animator.SetTrigger("Hit");
+            }
+        }
+    }
+
+    private IEnumerator DeathAnimation()
+    {
+        _animator.SetTrigger("Death");
+        float animationTime = 0f;
+        while (animationTime <= 1f)
+        {
+            animationTime += Time.deltaTime;
+            _playerTransform.localPosition = new Vector3(
+                0f - (animationTime * 1.5f),
+                Mathf.Sin(animationTime * Mathf.PI) * 0.8f,
+                0f
+            );
+            yield return new WaitForFixedUpdate();
+        }
+        animationTime = 0f;
+        while (animationTime <= 0.35f)
+        {
+            animationTime += Time.deltaTime;
+            _playerTransform.localPosition += Vector3.down * (Time.deltaTime * 1.2f);
         }
     }
 
@@ -47,6 +77,8 @@ public class PlayerHealth : MonoBehaviour
     {
         _health = MAX_HEALTH;
         _canBeDamaged = true;
+        _playerTransform.localPosition = _originalPosition;
+        _animator.SetTrigger("Reset");
     }
 
     private void OnDestroy()
