@@ -8,6 +8,7 @@ public class RockObstacle : MonoBehaviour
     private Transform _transform;
     private bool _isMoving = false;
     private float _leftBound;
+    private bool _hasCollided;
 
     private void Update()
     {
@@ -25,6 +26,17 @@ public class RockObstacle : MonoBehaviour
     {
         _transform = transform;
         _leftBound = leftBound;
+        _hasCollided = false;
         _isMoving = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!_hasCollided && (other.tag == "Player" || other.tag == "Board"))
+        {
+            _hasCollided = true;
+            //TODO trigger VFX
+            Destroy(gameObject);
+        }
     }
 }
