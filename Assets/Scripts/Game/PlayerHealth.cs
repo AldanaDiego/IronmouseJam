@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Transform _playerTransform;
 
     public event EventHandler OnPlayerDeath;
+    public event EventHandler<int> OnHealthChanged;
 
     private StageProgress _stageProgress;
     private Vector3 _originalPosition;
@@ -28,11 +29,17 @@ public class PlayerHealth : MonoBehaviour
         _originalPosition = _playerTransform.localPosition;
     }
 
+    public int GetMaxHealth()
+    {
+        return MAX_HEALTH;
+    }
+
     private void OnPlayerCollision(object sender, EventArgs empty)
     {
         if (_canBeDamaged)
         {
             _health--;
+            OnHealthChanged?.Invoke(this, _health);
             if (_health <= 0)
             {
                 StartCoroutine(DeathAnimation());
@@ -79,6 +86,7 @@ public class PlayerHealth : MonoBehaviour
         _canBeDamaged = true;
         _playerTransform.localPosition = _originalPosition;
         _animator.SetTrigger("Reset");
+        OnHealthChanged?.Invoke(this, _health);
     }
 
     private void OnDestroy()

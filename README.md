@@ -16,6 +16,7 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 
 ### Art
 - [Free Horizontal Game Backgrounds](https://free-game-assets.itch.io/free-horizontal-game-backgrounds) by Free Game Assets (GUI, Sprite, Tilesets)
+- [2D Casual UI HD](https://assetstore.unity.com/packages/2d/gui/icons/2d-casual-ui-hd-82080) by MiMU STUDIO
 
 ### Music
 - [30+ FREE Catchy Beat 'Em Up Music Pack](https://assetstore.unity.com/packages/audio/music/30-free-catchy-beat-em-up-music-pack-254121) by Melodic Purposes
