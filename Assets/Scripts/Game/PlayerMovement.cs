@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     
     private InputManager _inputManager;
     private StageProgress _stageProgress;
+    private PlayerHealth _playerHealth;
     private Transform _transform;
     private bool _canMove = true;
     private float _movementBoundHorizontal;
@@ -23,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
         _movementBoundVertical = bounds.y;
         _stageProgress = StageProgress.GetInstance();
         _stageProgress.OnStageClear += OnStageClear;
+        _stageProgress.OnStageRestart += OnStageRestart;
+        _playerHealth = GetComponent<PlayerHealth>();
+        _playerHealth.OnPlayerDeath += OnPlayerDeath;
     }
 
     private void Update()
@@ -57,5 +61,23 @@ public class PlayerMovement : MonoBehaviour
     {
         _canMove = false;
         StartCoroutine(MoveAway());
+    }
+
+    private void OnStageRestart(object sender, EventArgs empty)
+    {
+        _transform.position = Vector3.zero; 
+        _canMove = true;
+    }
+    
+    private void OnPlayerDeath(object sender, EventArgs empty)
+    {
+        _canMove = false;
+    }
+
+    private void OnDestroy()
+    {
+        _stageProgress.OnStageClear -= OnStageClear;
+        _stageProgress.OnStageRestart -= OnStageRestart;
+        _playerHealth.OnPlayerDeath -= OnPlayerDeath;    
     }
 }

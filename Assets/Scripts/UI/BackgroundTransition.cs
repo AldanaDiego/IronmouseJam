@@ -19,7 +19,7 @@ public class BackgroundTransition : MonoBehaviour
         StartCoroutine(EnterScene());
     }
 
-    private IEnumerator EnterScene()
+    public IEnumerator EnterScene()
     {
         _backgroundImage.alpha = 1f;
         yield return new WaitForSeconds(0.1f);
@@ -31,7 +31,7 @@ public class BackgroundTransition : MonoBehaviour
         _backgroundImage.gameObject.SetActive(false);
     }
 
-    private IEnumerator ExitScene()
+    public IEnumerator ExitScene()
     {
         _backgroundImage.alpha = 0f;
         _backgroundImage.gameObject.SetActive(true);

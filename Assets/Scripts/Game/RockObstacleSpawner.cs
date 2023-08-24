@@ -25,6 +25,8 @@ public class RockObstacleSpawner : MonoBehaviour
         _isActive = true;
         _stageProgress = StageProgress.GetInstance();
         _stageProgress.OnStageClear += OnStageClear;
+        _stageProgress.OnStageRestart += OnStageRestart;
+        _stageProgress.OnStageDeath += OnStageDeath;
     }
 
     private void Update()
@@ -52,5 +54,22 @@ public class RockObstacleSpawner : MonoBehaviour
     private void OnStageClear(object sender, EventArgs empty)
     {
         _isActive = false;
+    }
+
+    private void OnStageRestart(object sender, EventArgs empty)
+    {
+        _isActive = true;
+    }
+
+    private void OnStageDeath(object sender, EventArgs empty)
+    {
+        _isActive = false;
+    }
+
+    private void OnDestroy()
+    {
+        _stageProgress.OnStageClear -= OnStageClear;
+        _stageProgress.OnStageRestart -= OnStageRestart;
+        _stageProgress.OnStageDeath -= OnStageDeath;
     }
 }

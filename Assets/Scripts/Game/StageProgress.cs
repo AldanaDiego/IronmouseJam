@@ -5,8 +5,12 @@ using UnityEngine;
 
 public class StageProgress : Singleton<StageProgress>
 {
-    //public event EventHandler OnStageRestart;
+    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private BackgroundTransition _backgroundTransition;
+
+    public event EventHandler OnStageRestart;
     public event EventHandler OnStageClear;
+    public event EventHandler OnStageDeath;
 
     private const float STAGE_RESTART_TIME = 3f;
     private float _stageTotalTime = 15f; //TODO depends on difficulty
@@ -16,7 +20,8 @@ public class StageProgress : Singleton<StageProgress>
     private void Start()
     {
         _stageTimer = 0f;
-        _isActive = true;    
+        _isActive = true;
+        _playerHealth.OnPlayerDeath += OnPlayerDeath;
     }
 
     private void Update()
@@ -32,4 +37,27 @@ public class StageProgress : Singleton<StageProgress>
         }    
     }
 
+    private IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(1f);
+        yield return StartCoroutine(_backgroundTransition.ExitScene());
+        yield return new WaitForSeconds(0.25f);
+        OnStageRestart?.Invoke(this, EventArgs.Empty);
+        yield return new WaitForSeconds(0.25f);
+        yield return StartCoroutine(_backgroundTransition.EnterScene());
+        _isActive = true;
+    }
+
+    private void OnPlayerDeath(object sender, EventArgs empty)
+    {
+        OnStageDeath?.Invoke(this, EventArgs.Empty);
+        _isActive = false;
+        _stageTimer = 0f;
+        StartCoroutine(RestartGame());
+    }
+
+    private void OnDestroy()
+    {
+        _playerHealth.OnPlayerDeath -= OnPlayerDeath;
+    }
 }
