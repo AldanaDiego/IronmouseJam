@@ -37,6 +37,11 @@ public class StageProgress : Singleton<StageProgress>
         }    
     }
 
+    public float GetProgressPercentage()
+    {
+        return _stageTimer / _stageTotalTime;
+    }
+
     private IEnumerator RestartGame()
     {
         yield return new WaitForSeconds(1f);
