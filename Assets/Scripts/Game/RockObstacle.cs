@@ -32,7 +32,7 @@ public class RockObstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_hasCollided && (other.tag == "Player" || other.tag == "Board"))
+        if (!_hasCollided && (other.tag == "Player" || other.tag == "Board" || other.tag == "Enemy"))
         {
             _hasCollided = true;
             //TODO trigger VFX

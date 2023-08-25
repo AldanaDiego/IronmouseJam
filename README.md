@@ -9,6 +9,7 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 
 ### Prop Models
 - [POLYDesert](https://assetstore.unity.com/packages/3d/environments/landscapes/polydesert-107196) by Runemark Studio
+- [3D Props - Adorable Foods](https://assetstore.unity.com/packages/3d/props/food/3d-props-adorable-foods-31249) by Layer Lab
 
 ### Animations
 - [Warrior Pack Bundle 1 FREE](https://assetstore.unity.com/packages/3d/animations/warrior-pack-bundle-1-free-36405) by Explosive

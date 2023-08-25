@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCollision : MonoBehaviour
+public class EnemyCollision : MonoBehaviour
 {
-    public event EventHandler OnPlayerCollision;
+    public event EventHandler OnEnemyCollision;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Obstacle")
         {
-            OnPlayerCollision?.Invoke(this, EventArgs.Empty);
+            OnEnemyCollision?.Invoke(this, EventArgs.Empty);
         }
     }
 }

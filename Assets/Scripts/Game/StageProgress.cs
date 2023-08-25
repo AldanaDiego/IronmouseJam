@@ -11,15 +11,21 @@ public class StageProgress : Singleton<StageProgress>
     public event EventHandler OnStageRestart;
     public event EventHandler OnStageClear;
     public event EventHandler OnStageDeath;
+    public event EventHandler OnEnemySpawn;
 
     private const float STAGE_RESTART_TIME = 3f;
-    private float _stageTotalTime = 25f; //TODO depends on difficulty
+    private float _stageTotalTime = 35f; //TODO depends on difficulty
+    private float _enemySpawnTime = 10f; //TODO depends on difficulty 
     private float _stageTimer;
+    private float _enemyTimer;
+    private bool _hasEnemySpawned;
     private bool _isActive;
 
     private void Start()
     {
         _stageTimer = 0f;
+        _enemyTimer = 0f;
+        _hasEnemySpawned = false;
         _isActive = true;
         _playerHealth.OnPlayerDeath += OnPlayerDeath;
     }
@@ -29,10 +35,16 @@ public class StageProgress : Singleton<StageProgress>
         if (_isActive)
         {
             _stageTimer += Time.deltaTime;
+            _enemyTimer += Time.deltaTime;
             if (_stageTimer >= _stageTotalTime)
             {
                 _isActive = false;
                 OnStageClear?.Invoke(this, EventArgs.Empty);
+            }
+            if (!_hasEnemySpawned && _enemyTimer >= _enemySpawnTime)
+            {
+                _hasEnemySpawned = true;
+                OnEnemySpawn?.Invoke(this, EventArgs.Empty);
             }
         }    
     }
@@ -58,6 +70,8 @@ public class StageProgress : Singleton<StageProgress>
         OnStageDeath?.Invoke(this, EventArgs.Empty);
         _isActive = false;
         _stageTimer = 0f;
+        _enemyTimer = 0f;
+        _hasEnemySpawned = false;
         StartCoroutine(RestartGame());
     }
 
