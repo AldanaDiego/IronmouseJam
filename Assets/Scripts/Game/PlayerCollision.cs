@@ -9,7 +9,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Obstacle")
+        if (other.tag == "Obstacle" || other.tag == "Bullet")
         {
             OnPlayerCollision?.Invoke(this, EventArgs.Empty);
         }

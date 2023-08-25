@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6175204404182811447}
   - component: {fileID: 1766839727340831421}
+  - component: {fileID: -5660348424343197845}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -50,6 +51,21 @@ MonoBehaviour:
   _animator: {fileID: 4454126422106248818}
   _enemyTransform: {fileID: 7723691731642665992}
   _boardTransform: {fileID: 1617853356312671952}
+--- !u!114 &-5660348424343197845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981542371832834765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4e561d77eaf074ca46d40dfdce5920, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 4454126422106248818}
+  _bulletPrefab: {fileID: 9027061134287301668, guid: ea3c325f34181c94fbdd0aee0ce25862,
+    type: 3}
 --- !u!1001 &1617853356313062480
 PrefabInstance:
   m_ObjectHideFlags: 0

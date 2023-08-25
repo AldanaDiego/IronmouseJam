@@ -64,6 +64,11 @@ public class EnemyBehaviour : MonoBehaviour
         }
     }
 
+    public bool IsActive()
+    {
+        return _isActive;
+    }
+
     private void SetStartPosition()
     {
         _transform.position = new Vector3(_spawnStartPosition, 0f, 0f);
