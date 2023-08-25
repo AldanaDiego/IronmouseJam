@@ -8,10 +8,14 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private EnemyCollision _enemyCollision;
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _enemyTransform;
+    [SerializeField] private Transform _boardTransform;
 
     private const float SPAWN_OFFSET = 3f;
-    private const float SPAWN_SPEED = 3.5f;
+    private const float SPAWN_SPEED = 2.5f;
+    private const float MOVEMENT_SPEED = 3f;
+    private const float ELASTIC_FACTOR = (1f * ((float) Math.PI)) / 3f;
 
+    private Transform _player;
     private StageProgress _stageProgress;
     private Transform _transform;
     private Vector3 _enemyDefaultLocalPosition;
@@ -34,11 +38,30 @@ public class EnemyBehaviour : MonoBehaviour
         _activePosition = (bounds.x * -1) + 1.5f;
         _enemyDefaultLocalPosition = new Vector3(0f, 0.3f, 0f);
         SetStartPosition();
+
+        _player = FindObjectOfType<PlayerMovement>().transform;
     }
 
     private void Update()
     {
-        
+        if (_isActive)
+        {
+            float positionDiff = _player.position.z - _transform.position.z;
+            Vector3 direction = Vector3.zero;
+            if (positionDiff >= 0.5f)
+            {
+                direction = Vector3.forward;
+            }
+            else if (positionDiff <= -0.5f)
+            {
+                direction = Vector3.back;
+            }
+
+            if (direction != Vector3.zero)
+            {
+                _transform.position += direction * (Time.deltaTime * MOVEMENT_SPEED);
+            }
+        }
     }
 
     private void SetStartPosition()
@@ -49,13 +72,17 @@ public class EnemyBehaviour : MonoBehaviour
     private IEnumerator EnterStage()
     {
         _enemyTransform.localPosition += Vector3.left * SPAWN_OFFSET;
+        _boardTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
         while (_transform.position.x < _activePosition)
         {
             _transform.position += Vector3.right * (Time.deltaTime * SPAWN_SPEED);
+            float movementProgress = (_transform.position.x - _activePosition + 1.5f) / 1.5f;
+            _boardTransform.localRotation = Quaternion.Euler(0f, 0f, 25f * ElasticEaseOut(movementProgress));
             yield return new WaitForFixedUpdate();
         }
         _transform.position = new Vector3(_activePosition, 0f, 0f);
+        _boardTransform.localRotation = Quaternion.Euler(0f, 0f, 25f);
 
         float jumpTimer = 0f;
         _animator.SetTrigger("Jump");
@@ -75,8 +102,32 @@ public class EnemyBehaviour : MonoBehaviour
         _isActive = true;
     }
 
+    private float ElasticEaseOut(float x)
+    {
+        if (x <= 0.01f)
+        {
+            return 0f;
+        }
+        if (x >= 0.99f)
+        {
+            return 1f;
+        }
+        return (float) (Math.Pow(2, -3 * x) * Math.Sin((x * 10 - 0.75f) * ELASTIC_FACTOR)) + 1;
+    }
+
+    private IEnumerator CollisionCooldown()
+    {
+        _isActive = false;
+        yield return new WaitForSeconds(0.5f);
+        _isActive = true;
+    }
+
     private void OnEnemyCollision(object sender, EventArgs empty)
     {
+        if (_isActive)
+        {
+            StartCoroutine(CollisionCooldown());
+        }
         _animator.SetTrigger("Hit");
     }
 

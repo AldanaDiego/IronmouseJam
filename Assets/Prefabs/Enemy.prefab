@@ -49,6 +49,7 @@ MonoBehaviour:
   _enemyCollision: {fileID: 4797317249155585472}
   _animator: {fileID: 4454126422106248818}
   _enemyTransform: {fileID: 7723691731642665992}
+  _boardTransform: {fileID: 1617853356312671952}
 --- !u!1001 &1617853356313062480
 PrefabInstance:
   m_ObjectHideFlags: 0
