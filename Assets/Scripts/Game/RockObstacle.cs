@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockObstacle : MonoBehaviour
 {
-    private const float MOVEMENT_SPEED = 5f;
+    private float MovementSpeed;
     private Transform _transform;
     private SFXManager _sfxManager;
     private bool _isMoving = false;
@@ -13,14 +13,15 @@ public class RockObstacle : MonoBehaviour
 
     private void Start()
     {
-        _sfxManager = SFXManager.GetInstance();    
+        _sfxManager = SFXManager.GetInstance();
+        MovementSpeed = DifficultySettings.GetInstance().GetRockObstacleSpeed();  
     }
 
     private void Update()
     {
         if (_isMoving)
         {
-            _transform.position += Vector3.left * (MOVEMENT_SPEED * Time.deltaTime);
+            _transform.position += Vector3.left * (MovementSpeed * Time.deltaTime);
             if (_transform.position.x <= _leftBound)
             {
                 Destroy(gameObject);

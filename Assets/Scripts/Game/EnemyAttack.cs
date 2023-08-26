@@ -13,11 +13,12 @@ public class EnemyAttack : MonoBehaviour
     private SFXManager _sfxManager;
     private Transform _transform;
     private Vector3 _bulletOffset = new Vector3(1f, 1.25f, 0f);
-    private float _attackCooldown = 5f; //TODO depends on difficulty
+    private float AttackCooldown;
     private float _attackTimer;
 
     private void Start()
     {
+        AttackCooldown = DifficultySettings.GetInstance().GetEnemyAttackSpeed();
         _behaviour = GetComponent<EnemyBehaviour>();
         _stageProgress = StageProgress.GetInstance();
         _sfxManager = SFXManager.GetInstance();
@@ -31,7 +32,7 @@ public class EnemyAttack : MonoBehaviour
         if (_behaviour.IsActive())
         {
             _attackTimer += Time.deltaTime;
-            if (_attackTimer >= _attackCooldown)
+            if (_attackTimer >= AttackCooldown)
             {
                 Attack();
             }

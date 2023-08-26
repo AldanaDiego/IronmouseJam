@@ -51,6 +51,7 @@ MonoBehaviour:
   _animator: {fileID: 4454126422106248818}
   _enemyTransform: {fileID: 7723691731642665992}
   _boardTransform: {fileID: 1617853356312671952}
+  _collider: {fileID: 1709065764505691558}
 --- !u!114 &-5660348424343197845
 MonoBehaviour:
   m_ObjectHideFlags: 0

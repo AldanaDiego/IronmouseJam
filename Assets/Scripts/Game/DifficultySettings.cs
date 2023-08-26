@@ -14,8 +14,57 @@ public class DifficultySettings : Singleton<DifficultySettings>
         {
             ULTIMATE => 10.5f,
             HARD => 8.5f,
-            NORMAL => 6.5f,
             _ => 6.5f,
+        };
+    }
+
+    public float GetEnemyAttackSpeed()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 2f,
+            HARD => 3.5f,
+            _ => 4.5f
+        };
+    }
+
+    public float GetRockObstacleSpeed()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 13f,
+            HARD => 10f,
+            _ => 7f
+        };
+    }
+
+    public float GetObstacleSpawnCooldown()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 2.5f,
+            HARD => 3f,
+            _ => 3.5f
+        };
+    }
+
+    public float GetStageTotalTime()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 120f,
+            HARD => 90f,
+            _ => 75f
+        };
+    }
+
+    public float GetEnemySpawnTime()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 3f,
+            HARD => 15f,
+            _ => 25f
         };
     }
 }

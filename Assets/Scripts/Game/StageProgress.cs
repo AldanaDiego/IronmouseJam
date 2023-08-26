@@ -15,8 +15,8 @@ public class StageProgress : Singleton<StageProgress>
 
     private const float STAGE_RESTART_TIME = 3f;
     private SFXManager _sfxManager;
-    private float _stageTotalTime = 35f; //TODO depends on difficulty
-    private float _enemySpawnTime = 10f; //TODO depends on difficulty 
+    private float StageTotalTime;
+    private float EnemySpawnTime;
     private float _stageTimer;
     private float _enemyTimer;
     private bool _hasEnemySpawned;
@@ -24,6 +24,10 @@ public class StageProgress : Singleton<StageProgress>
 
     private void Start()
     {
+        DifficultySettings difficultySettings = DifficultySettings.GetInstance();
+        StageTotalTime = difficultySettings.GetStageTotalTime();
+        EnemySpawnTime = difficultySettings.GetEnemySpawnTime();
+
         _sfxManager = SFXManager.GetInstance();
         _stageTimer = 0f;
         _enemyTimer = 0f;
@@ -38,13 +42,13 @@ public class StageProgress : Singleton<StageProgress>
         {
             _stageTimer += Time.deltaTime;
             _enemyTimer += Time.deltaTime;
-            if (_stageTimer >= _stageTotalTime)
+            if (_stageTimer >= StageTotalTime)
             {
                 _isActive = false;
                 _sfxManager.PlayVictory();
                 OnStageClear?.Invoke(this, EventArgs.Empty);
             }
-            if (!_hasEnemySpawned && _enemyTimer >= _enemySpawnTime)
+            if (!_hasEnemySpawned && _enemyTimer >= EnemySpawnTime)
             {
                 _hasEnemySpawned = true;
                 OnEnemySpawn?.Invoke(this, EventArgs.Empty);
@@ -54,7 +58,7 @@ public class StageProgress : Singleton<StageProgress>
 
     public float GetProgressPercentage()
     {
-        return _stageTimer / _stageTotalTime;
+        return _stageTimer / StageTotalTime;
     }
 
     private IEnumerator RestartGame()

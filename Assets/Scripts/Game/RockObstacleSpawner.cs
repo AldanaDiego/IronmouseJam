@@ -13,11 +13,12 @@ public class RockObstacleSpawner : MonoBehaviour
     private float _leftBound;
     private float _spawnPosition = 12f;
     private bool _isActive = false;
-    private float _spawnCooldown = 3.5f; //TODO depends on difficulty
     private float _cooldownTimer = 0f;
+    private float SpawnCooldown;
 
     private void Start()
     {
+        SpawnCooldown = DifficultySettings.GetInstance().GetObstacleSpawnCooldown();
         Vector2 bounds = GameBounds.GetInstance().GetScreenBounds();
         _upperBound = bounds.y;
         _lowerBound = bounds.y * -1;
@@ -34,7 +35,7 @@ public class RockObstacleSpawner : MonoBehaviour
         if (_isActive)
         {
             _cooldownTimer += Time.deltaTime;
-            if (_cooldownTimer >= _spawnCooldown)
+            if (_cooldownTimer >= SpawnCooldown)
             {
                 RockObstacle rock = Instantiate(
                     _rockPrefab,

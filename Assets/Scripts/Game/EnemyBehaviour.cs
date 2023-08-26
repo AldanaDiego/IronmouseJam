@@ -9,10 +9,11 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _enemyTransform;
     [SerializeField] private Transform _boardTransform;
+    [SerializeField] private Collider _collider;
 
     private const float SPAWN_OFFSET = 3f;
     private const float SPAWN_SPEED = 2.5f;
-    private const float MOVEMENT_SPEED = 3f;
+    private const float MOVEMENT_SPEED = 5f;
     private const float ELASTIC_FACTOR = (1f * ((float) Math.PI)) / 3f;
 
     private Transform _player;
@@ -25,6 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Start()
     {
+        _collider.enabled = false;
         _stageProgress = StageProgress.GetInstance();
         _stageProgress.OnStageClear += OnStageClear;
         _stageProgress.OnStageRestart += OnStageRestart;
@@ -48,11 +50,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             float positionDiff = _player.position.z - _transform.position.z;
             Vector3 direction = Vector3.zero;
-            if (positionDiff >= 0.5f)
+            if (positionDiff >= 0.25f)
             {
                 direction = Vector3.forward;
             }
-            else if (positionDiff <= -0.5f)
+            else if (positionDiff <= -0.25f)
             {
                 direction = Vector3.back;
             }
@@ -76,6 +78,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private IEnumerator EnterStage()
     {
+        _collider.enabled = true;
         _enemyTransform.localPosition += Vector3.left * SPAWN_OFFSET;
         _boardTransform.localRotation = Quaternion.Euler(0f, 0f, 0f);
 
@@ -144,6 +147,7 @@ public class EnemyBehaviour : MonoBehaviour
     private void OnStageRestart(object sender, EventArgs empty)
     {
         _isActive = false;
+        _collider.enabled = false;
         SetStartPosition();   
     }
 
