@@ -6,9 +6,15 @@ public class RockObstacle : MonoBehaviour
 {
     private const float MOVEMENT_SPEED = 5f;
     private Transform _transform;
+    private SFXManager _sfxManager;
     private bool _isMoving = false;
     private float _leftBound;
     private bool _hasCollided;
+
+    private void Start()
+    {
+        _sfxManager = SFXManager.GetInstance();    
+    }
 
     private void Update()
     {
@@ -35,6 +41,7 @@ public class RockObstacle : MonoBehaviour
         if (!_hasCollided && (other.tag == "Player" || other.tag == "Board" || other.tag == "Enemy"))
         {
             _hasCollided = true;
+            _sfxManager.PlayObstacleHit();
             //TODO trigger VFX
             Destroy(gameObject);
         }

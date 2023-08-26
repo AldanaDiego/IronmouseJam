@@ -10,6 +10,7 @@ public class PlayerJump : MonoBehaviour
     private InputManager _inputManager;
     private StageProgress _stageProgress;
     private PlayerHealth _playerHealth;
+    private SFXManager _sfxManager;
     private Vector3 _defaultPosition;
     private const float JUMP_TIME = 1.2f;
     private const float JUMP_HEIGHT = 3f;
@@ -22,6 +23,7 @@ public class PlayerJump : MonoBehaviour
 
     private void Start()
     {
+        _sfxManager = SFXManager.GetInstance();
         _defaultPosition = _playerTransform.localPosition;
         _inputManager = InputManager.GetInstance();
         _inputManager.OnOkActionPerformed += OnOkActionPerformed;
@@ -49,6 +51,7 @@ public class PlayerJump : MonoBehaviour
             {
                 _playerTransform.localPosition = _defaultPosition;
                 _animator.SetTrigger("Reset");
+                _sfxManager.PlayJumpLanding();
                 _isCooldown = true;
                 _cooldownTimer = 0f;
                 _isJumping = false;

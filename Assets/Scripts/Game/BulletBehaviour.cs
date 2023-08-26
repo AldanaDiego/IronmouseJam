@@ -8,11 +8,13 @@ public class BulletBehaviour : MonoBehaviour
     private const float ROTATION_SPEED = -180f;
 
     private Transform _transform;
+    private SFXManager _sfxManager;
     private float _horizontalBound;
     private bool _isActive;
 
     private void Start()
     {
+        _sfxManager = SFXManager.GetInstance();
         Vector3 bounds = GameBounds.GetInstance().GetScreenBounds();
         _horizontalBound = bounds.x + 3f;
         _transform = transform;
@@ -36,7 +38,7 @@ public class BulletBehaviour : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            //TODO sfx
+            _sfxManager.PlayBulletHit();
             Destroy(gameObject);
         }    
     }

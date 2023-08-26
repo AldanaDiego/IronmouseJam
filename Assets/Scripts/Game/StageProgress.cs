@@ -14,6 +14,7 @@ public class StageProgress : Singleton<StageProgress>
     public event EventHandler OnEnemySpawn;
 
     private const float STAGE_RESTART_TIME = 3f;
+    private SFXManager _sfxManager;
     private float _stageTotalTime = 35f; //TODO depends on difficulty
     private float _enemySpawnTime = 10f; //TODO depends on difficulty 
     private float _stageTimer;
@@ -23,6 +24,7 @@ public class StageProgress : Singleton<StageProgress>
 
     private void Start()
     {
+        _sfxManager = SFXManager.GetInstance();
         _stageTimer = 0f;
         _enemyTimer = 0f;
         _hasEnemySpawned = false;
@@ -39,6 +41,7 @@ public class StageProgress : Singleton<StageProgress>
             if (_stageTimer >= _stageTotalTime)
             {
                 _isActive = false;
+                _sfxManager.PlayVictory();
                 OnStageClear?.Invoke(this, EventArgs.Empty);
             }
             if (!_hasEnemySpawned && _enemyTimer >= _enemySpawnTime)

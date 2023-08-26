@@ -10,6 +10,7 @@ public class EnemyAttack : MonoBehaviour
 
     private EnemyBehaviour _behaviour;
     private StageProgress _stageProgress;
+    private SFXManager _sfxManager;
     private Transform _transform;
     private Vector3 _bulletOffset = new Vector3(1f, 1.25f, 0f);
     private float _attackCooldown = 5f; //TODO depends on difficulty
@@ -19,6 +20,7 @@ public class EnemyAttack : MonoBehaviour
     {
         _behaviour = GetComponent<EnemyBehaviour>();
         _stageProgress = StageProgress.GetInstance();
+        _sfxManager = SFXManager.GetInstance();
         _stageProgress.OnStageRestart += OnStageRestart;
         _attackTimer = 0f;
         _transform = transform;
@@ -31,11 +33,17 @@ public class EnemyAttack : MonoBehaviour
             _attackTimer += Time.deltaTime;
             if (_attackTimer >= _attackCooldown)
             {
-                _attackTimer = 0f;
-                _animator.SetTrigger("Attack");
-                Instantiate(_bulletPrefab, _transform.position + _bulletOffset, Quaternion.Euler(0f, 180f, 0f));
+                Attack();
             }
         }    
+    }
+
+    private void Attack()
+    {
+        _attackTimer = 0f;
+        _animator.SetTrigger("Attack");
+        _sfxManager.PlayBulletShot();
+        Instantiate(_bulletPrefab, _transform.position + _bulletOffset, Quaternion.Euler(0f, 180f, 0f));
     }
 
     private void OnStageRestart(object sender, EventArgs empty)
