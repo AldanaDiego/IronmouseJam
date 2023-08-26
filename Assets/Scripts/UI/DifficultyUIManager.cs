@@ -15,7 +15,7 @@ public class DifficultyUIManager : MonoBehaviour
 
     public void OnDifficultySelected(int difficulty)
     {
-        if (Enum.IsDefined(typeof(Consts.DIFFICULTIES), difficulty))
+        if (Enum.IsDefined(typeof(Consts.Difficulties), difficulty))
         {
             PlayerPrefs.SetInt("Difficulty", difficulty);
             _sceneManager.ChangeToGameScene();

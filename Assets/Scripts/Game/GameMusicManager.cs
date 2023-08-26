@@ -18,17 +18,17 @@ public class GameMusicManager : MonoBehaviour
     {
         switch (PlayerPrefs.GetInt("Difficulty"))
         {
-            case (int) Consts.DIFFICULTIES.NORMAL:
+            case (int) Consts.Difficulties.NORMAL:
                 _audioSource.clip = _normalMusic;
                 _audioSource.Play();
                 break;
 
-            case (int) Consts.DIFFICULTIES.HARD:
+            case (int) Consts.Difficulties.HARD:
                 _audioSource.clip = _hardMusic;
                 _audioSource.Play();
                 break;
 
-            case (int) Consts.DIFFICULTIES.ULTIMATE:
+            case (int) Consts.Difficulties.ULTIMATE:
                 _audioSource.clip = _ultimateMusicLoop;
                 _audioSource.PlayOneShot(_ultimateMusicStart);
                 _audioSource.PlayScheduled(AudioSettings.dspTime + _ultimateMusicStart.length + LOOP_START_OFFSET);
