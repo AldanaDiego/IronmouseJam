@@ -2881,6 +2881,7 @@ MonoBehaviour:
   _bulletShot: {fileID: 8300000, guid: df6d6e6970d3ebc40a5ecbe1e1f21c1e, type: 3}
   _bulletHit: {fileID: 8300000, guid: 6739c01659ad96d47987f4ddee226b36, type: 3}
   _obstacleHit: {fileID: 8300000, guid: 5ff823f546b52574a931e1d9b44290a6, type: 3}
+  _jumpStart: {fileID: 8300000, guid: ce3bd1c11c173421c84b26bfdd9d9c5d, type: 3}
   _jumpLanding: {fileID: 8300000, guid: 0945b72b3fde78e41b2d01139ecee2a5, type: 3}
   _victory: {fileID: 8300000, guid: ae4440b05ef1f204d844169cfdafd529, type: 3}
 --- !u!4 &1557807360

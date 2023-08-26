@@ -23,3 +23,7 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 
 ### Music and SFX
 - [30+ FREE Catchy Beat 'Em Up Music Pack](https://assetstore.unity.com/packages/audio/music/30-free-catchy-beat-em-up-music-pack-254121) by Melodic Purposes
+- [96 General Library (Free Sample Pack)](https://assetstore.unity.com/packages/audio/sound-fx/96-general-library-free-sample-pack-185157) by InspectorJ Sound Effects
+- [Free Sound Effects Pack](https://assetstore.unity.com/packages/audio/sound-fx/free-sound-effects-pack-155776) by Olivier Girardot
+- [Game Interface Sound Pack](https://assetstore.unity.com/packages/audio/sound-fx/game-interface-sound-pack-147868) by Background Sounds
+- [COMPLETE PUZZLE SOUNDS](https://assetstore.unity.com/packages/audio/sound-fx/complete-puzzle-sounds-259106) by Ben Vibrant

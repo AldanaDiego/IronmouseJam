@@ -71,6 +71,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (_canJump && !_isJumping && !_isCooldown)
         {
+            _sfxManager.PlayJumpStart();
             _animator.SetTrigger("Jump");
             _jumpTimer = 0f;
             _isJumping = true;

@@ -9,6 +9,7 @@ public class SFXManager : Singleton<SFXManager>
     [SerializeField] private AudioClip _bulletShot;
     [SerializeField] private AudioClip _bulletHit;
     [SerializeField] private AudioClip _obstacleHit;
+    [SerializeField] private AudioClip _jumpStart;
     [SerializeField] private AudioClip _jumpLanding;
     [SerializeField] private AudioClip _victory;
 
@@ -36,6 +37,11 @@ public class SFXManager : Singleton<SFXManager>
     public void PlayObstacleHit()
     {
         _audioSource.PlayOneShot(_obstacleHit);
+    }
+
+    public void PlayJumpStart()
+    {
+        _audioSource.PlayOneShot(_jumpStart);
     }
 
     public void PlayJumpLanding()
