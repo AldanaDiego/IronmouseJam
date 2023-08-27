@@ -77,6 +77,11 @@ MonoBehaviour:
   _playerCollision: {fileID: 1537684964916117079}
   _animator: {fileID: 8353332569274051098}
   _playerTransform: {fileID: 2669741098179113056}
+  _faceRenderer: {fileID: 9067152529425927866}
+  _defaultMaterial:
+  - {fileID: 2100000, guid: d17f6718d24d8764ab25a607141af0a1, type: 2}
+  _damageMaterial:
+  - {fileID: 2100000, guid: 4372ec17f88bd0b449393d3d408635a1, type: 2}
 --- !u!1001 &1574012398323636796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -560,6 +565,11 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6868716418057165105, guid: 8b34ad003b495cc4dbc4a5856029cf23,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4372ec17f88bd0b449393d3d408635a1, type: 2}
     - target: {fileID: 7036213049465896255, guid: 8b34ad003b495cc4dbc4a5856029cf23,
         type: 3}
       propertyPath: m_Layer
@@ -646,6 +656,12 @@ MonoBehaviour:
 --- !u!95 &8353332569274051098 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 8b34ad003b495cc4dbc4a5856029cf23,
+    type: 3}
+  m_PrefabInstance: {fileID: 2487792526510479243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &9067152529425927866 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6868716418057165105, guid: 8b34ad003b495cc4dbc4a5856029cf23,
     type: 3}
   m_PrefabInstance: {fileID: 2487792526510479243}
   m_PrefabAsset: {fileID: 0}

@@ -9,6 +9,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _playerTransform;
 
+    [SerializeField] private Renderer _faceRenderer;
+    [SerializeField] private List<Material> _defaultMaterial;
+    [SerializeField] private List<Material> _damageMaterial;
+
     public event EventHandler OnPlayerDeath;
     public event EventHandler<int> OnHealthChanged;
 
@@ -21,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         _health = MAX_HEALTH;
+        _faceRenderer.SetMaterials(_defaultMaterial);
         _playerCollision.OnPlayerCollision += OnPlayerCollision;
         _stageProgress = StageProgress.GetInstance();
         _stageProgress.OnStageClear += OnStageClear;
@@ -39,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
         if (_canBeDamaged)
         {
             _health--;
+            _faceRenderer.SetMaterials(_damageMaterial);
             OnHealthChanged?.Invoke(this, _health);
             if (_health <= 0)
             {
@@ -48,9 +54,16 @@ public class PlayerHealth : MonoBehaviour
             }
             else
             {
+                StartCoroutine(DamageFace());
                 _animator.SetTrigger("Hit");
             }
         }
+    }
+
+    private IEnumerator DamageFace()
+    {
+        yield return new WaitForSeconds(0.75f);
+        _faceRenderer.SetMaterials(_defaultMaterial);
     }
 
     private IEnumerator DeathAnimation()
@@ -84,6 +97,7 @@ public class PlayerHealth : MonoBehaviour
     {
         _health = MAX_HEALTH;
         _canBeDamaged = true;
+        _faceRenderer.SetMaterials(_defaultMaterial);
         _playerTransform.localPosition = _originalPosition;
         _animator.SetTrigger("Reset");
         OnHealthChanged?.Invoke(this, _health);
