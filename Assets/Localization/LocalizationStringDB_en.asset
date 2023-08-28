@@ -50,6 +50,10 @@ MonoBehaviour:
     m_Localized: Thanks for playing!
     m_Metadata:
       m_Items: []
+  - m_Id: 3204776795136000
+    m_Localized: Styx River, Underworld
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

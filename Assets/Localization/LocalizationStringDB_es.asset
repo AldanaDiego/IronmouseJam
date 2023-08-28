@@ -50,6 +50,10 @@ MonoBehaviour:
     m_Localized: "\xA1Gracias por jugar!"
     m_Metadata:
       m_Items: []
+  - m_Id: 3204776795136000
+    m_Localized: Rio Styx, Inframundo
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
