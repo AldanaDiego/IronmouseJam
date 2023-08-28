@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private const float MOVEMENT_SPEED = 8f;
+
+    public event EventHandler OnPlayerMovedAway;
     
     private InputManager _inputManager;
     private StageProgress _stageProgress;
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
             _transform.position += Vector3.right * (MOVEMENT_SPEED * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
+        OnPlayerMovedAway?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnStageClear(object sender, EventArgs empty)

@@ -36,6 +36,13 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
         StartCoroutine(ChangeScene("TitleScene"));
     }
 
+    public void ChangeToWinScene()
+    {
+        _shouldSceneFadeIn = true;
+        OnSceneChanging?.Invoke(this, EventArgs.Empty);
+        StartCoroutine(ChangeScene("WinnerScene"));
+    }
+
     private IEnumerator ChangeScene(string sceneName)
     {
         yield return new WaitForSeconds(SCENE_CHANGE_TIMER);

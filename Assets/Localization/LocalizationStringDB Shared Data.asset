@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: TITLE_BUTTON_BACK
     m_Metadata:
       m_Items: []
+  - m_Id: 3180324506132480
+    m_Key: WIN_THANKS
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

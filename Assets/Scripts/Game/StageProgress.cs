@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class StageProgress : Singleton<StageProgress>
 {
     [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private BackgroundTransition _backgroundTransition;
 
     public event EventHandler OnStageRestart;
@@ -27,13 +29,14 @@ public class StageProgress : Singleton<StageProgress>
         DifficultySettings difficultySettings = DifficultySettings.GetInstance();
         StageTotalTime = difficultySettings.GetStageTotalTime();
         EnemySpawnTime = difficultySettings.GetEnemySpawnTime();
+        _playerHealth.OnPlayerDeath += OnPlayerDeath;
+        _playerMovement.OnPlayerMovedAway += OnPlayerMovedAway;
 
         _sfxManager = SFXManager.GetInstance();
         _stageTimer = 0f;
         _enemyTimer = 0f;
         _hasEnemySpawned = false;
         _isActive = true;
-        _playerHealth.OnPlayerDeath += OnPlayerDeath;
     }
 
     private void Update()
@@ -80,6 +83,11 @@ public class StageProgress : Singleton<StageProgress>
         _enemyTimer = 0f;
         _hasEnemySpawned = false;
         StartCoroutine(RestartGame());
+    }
+
+    private void OnPlayerMovedAway(object sender, EventArgs empty)
+    {
+        SceneTransitionManager.GetInstance().ChangeToWinScene();
     }
 
     private void OnDestroy()
