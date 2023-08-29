@@ -11,6 +11,7 @@ public class IntroManager : MonoBehaviour
     
     [SerializeField] private GameObject _bubi;
     [SerializeField] private Transform _surfer1;
+    [SerializeField] private Transform _surfer2;
     [SerializeField] private Transform _mouseSurfer1;
     [SerializeField] private Transform _mouseFalling;
     [SerializeField] private ParticleSystem _smokeParticleSystem;
@@ -39,10 +40,12 @@ public class IntroManager : MonoBehaviour
         _timedActions.Add(0, () =>
         {
             SetPosition(_surfer1, new Vector3(-5.3f, 0.1f, -4.5f));
+            SetPosition(_surfer2, new Vector3(-5.6f, 0.1f, -4.5f));
             SetPosition(_mouseFalling, new Vector3(-0.5f, 3f, -2f));
             _mouseFalling.gameObject.SetActive(false);
 
             SetPosition(_cameraTransform, new Vector3(8f, 1.1f, -4f));
+            _cameraTransform.rotation = Quaternion.Euler(10f, -15f, 0f);
             StartCoroutine(Move(_cameraTransform, new Vector3(0f, 1.2f, -6f), 1f));
         });
 
@@ -118,15 +121,31 @@ public class IntroManager : MonoBehaviour
 
         _timedActions.Add(27, () =>
         {
-           SetText(LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "INTRO_DIALOGUE_WARNING"));
-           //Move camera
-           //Move mouse surfer 2
+            SetText(LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "INTRO_DIALOGUE_WARNING"));
+            SetPosition(_cameraTransform, new Vector3(-0.5f, 1.2f, -6f));
+            StartCoroutine(Move(_cameraTransform, new Vector3(0.5f, 1.2f, -7f), 1f));
+            StartCoroutine(Move(_surfer2, new Vector3(4f, 0.1f, -4f), 5f));
         });
 
         _timedActions.Add(29, () =>
         {
-            //Move camera
-            //Waterfall??
+            SetPosition(_cameraTransform, new Vector3(-35f, -1f, -0.5f));
+            _cameraTransform.rotation = Quaternion.Euler(-30f, -85f, 0f);
+            SetPosition(_surfer2, new Vector3(-42f, 1.7f, 0f));
+            _surfer2.rotation = Quaternion.Euler(0f, 0f, 10f);
+            StartCoroutine(Move(_surfer2, new Vector3(-39f, 1.7f, 0f), 2f));
+        });
+
+        _timedActions.Add(30, () =>
+        {
+            SetText(LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "INTRO_DIALOGUE_BUBI"));
+            StartCoroutine(Move(_surfer2, new Vector3(-35f, -1f, 0f), 2f));
+        });
+
+        _timedActions.Add(32, () =>
+        {
+            SetText("");
+            _sceneManager.ChangeToGameScene();
         });
         
     }
@@ -145,7 +164,7 @@ public class IntroManager : MonoBehaviour
     private IEnumerator Move(Transform _transform, Vector3 position, float speed)
     {
         Vector3 direction = (position - _transform.position).normalized;
-        while (Vector3.Distance(_transform.position, position) >= 0.05f)
+        while (Vector3.Distance(_transform.position, position) >= 0.07f)
         {
             _transform.position += direction * (Time.deltaTime * speed);
             yield return new WaitForFixedUpdate();
@@ -156,7 +175,7 @@ public class IntroManager : MonoBehaviour
     private IEnumerator MoveLocal(Transform _transform, Vector3 position, float speed)
     {
         Vector3 direction = (position - _transform.localPosition).normalized;
-        while (Vector3.Distance(_transform.localPosition, position) >= 0.05f)
+        while (Vector3.Distance(_transform.localPosition, position) >= 0.07f)
         {
             _transform.localPosition += direction * (Time.deltaTime * speed);
             yield return new WaitForFixedUpdate();

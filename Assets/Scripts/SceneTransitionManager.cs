@@ -24,9 +24,20 @@ public class SceneTransitionManager : Singleton<SceneTransitionManager>
 
     public void ChangeToGameScene()
     {
-        _shouldSceneFadeIn = true;
-        OnSceneChanging?.Invoke(this, EventArgs.Empty);
-        StartCoroutine(ChangeScene("GameScene"));
+        bool shouldLoadCutscene = PlayerPrefs.HasKey("WatchedCutscene") ? PlayerPrefs.GetInt("WatchedCutscene") != 1 : true;
+        if (shouldLoadCutscene)
+        {
+            _shouldSceneFadeIn = true;
+            PlayerPrefs.SetInt("WatchedCutscene", 1);
+            OnSceneChanging?.Invoke(this, EventArgs.Empty);
+            StartCoroutine(ChangeScene("IntroScene"));    
+        }
+        else
+        {
+            _shouldSceneFadeIn = true;
+            OnSceneChanging?.Invoke(this, EventArgs.Empty);
+            StartCoroutine(ChangeScene("GameScene"));
+        }
     }
 
     public void ChangeToTitleScene()

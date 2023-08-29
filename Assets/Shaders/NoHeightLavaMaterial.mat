@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LavaMaterial
+  m_Name: NoHeightLavaMaterial
   m_Shader: {fileID: -6465566751694194690, guid: 1c9f53408b123184582577430bd56ea7,
     type: 3}
   m_Parent: {fileID: 0}
@@ -56,7 +56,7 @@ Material:
     - _FoamDensity: 5
     - _FoamSpeed: 5
     - _FoamThickness: 2
-    - _LavaHeight: 0.1
+    - _LavaHeight: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
