@@ -54,6 +54,18 @@ MonoBehaviour:
     m_Localized: Rio Styx, Inframundo
     m_Metadata:
       m_Items: []
+  - m_Id: 3484627720560640
+    m_Localized: "- \xA1Espera Mouse!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3484776849039360
+    m_Localized: "- \xA1Esa no es una tabla!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3484992130080768
+    m_Localized: "- \xA1Es Bubi!"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

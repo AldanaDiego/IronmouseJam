@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: INTRO_DIALOGUE_LOCATION
     m_Metadata:
       m_Items: []
+  - m_Id: 3484627720560640
+    m_Key: INTRO_DIALOGUE_WAIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3484776849039360
+    m_Key: INTRO_DIALOGUE_WARNING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3484992130080768
+    m_Key: INTRO_DIALOGUE_BUBI
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

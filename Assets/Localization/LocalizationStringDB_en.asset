@@ -54,6 +54,18 @@ MonoBehaviour:
     m_Localized: Styx River, Underworld
     m_Metadata:
       m_Items: []
+  - m_Id: 3484627720560640
+    m_Localized: '- Wait Mouse!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3484776849039360
+    m_Localized: '- That''s not a surfboard!'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3484992130080768
+    m_Localized: '- That''s Bubi!'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

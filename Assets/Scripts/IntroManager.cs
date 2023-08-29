@@ -8,10 +8,18 @@ using UnityEngine.Localization.Settings;
 public class IntroManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
+    
+    [SerializeField] private GameObject _bubi;
     [SerializeField] private Transform _surfer1;
+    [SerializeField] private Transform _mouseSurfer1;
+    [SerializeField] private Transform _mouseFalling;
     [SerializeField] private ParticleSystem _smokeParticleSystem;
+    [SerializeField] private Animator _mouseSurferAnimator;
+    [SerializeField] private Animator _mouseFallingAnimator;
+    
     [SerializeField] private Renderer _mouseFaceRenderer;
     [SerializeField] private Renderer _monkeFaceRenderer;
+    [SerializeField] private List<Material> _defaultFaceMaterial;
     [SerializeField] private List<Material> _angryFaceMaterial;
     [SerializeField] private List<Material> _surpriseFaceMaterial;
     [SerializeField] private List<Material> _scaredFaceMaterial;
@@ -27,9 +35,12 @@ public class IntroManager : MonoBehaviour
         _sceneManager = SceneTransitionManager.GetInstance();
         _timedActions = new Dictionary<int, Action>();
 
+        //This is an absolute mess, if you're reading this I'm sorry
         _timedActions.Add(0, () =>
         {
             SetPosition(_surfer1, new Vector3(-5.3f, 0.1f, -4.5f));
+            SetPosition(_mouseFalling, new Vector3(-0.5f, 3f, -2f));
+            _mouseFalling.gameObject.SetActive(false);
 
             SetPosition(_cameraTransform, new Vector3(8f, 1.1f, -4f));
             StartCoroutine(Move(_cameraTransform, new Vector3(0f, 1.2f, -6f), 1f));
@@ -64,12 +75,58 @@ public class IntroManager : MonoBehaviour
         
         _timedActions.Add(17, () =>
         {
-            //jump, move table down
+            _mouseSurferAnimator.SetTrigger("Jump");
+            StartCoroutine(MoveLocal(_mouseSurfer1, new Vector3(0f, 3f, 0f), 3.5f));
+            StartCoroutine(Move(_surfer1, new Vector3(-1f, -0.1f, -4f), 0.2f));
         });
 
         _timedActions.Add(18, () =>
         {
             Destroy(_surfer1.gameObject);
+            _mouseFalling.gameObject.SetActive(true);
+            _mouseFallingAnimator.SetTrigger("Fall");
+        });
+
+        _timedActions.Add(19, () =>
+        {
+            //Move mouse 2 down
+            StartCoroutine(Move(_mouseFalling, new Vector3(-0.5f, 0.4f, -2f), 2.75f));
+        });
+
+        _timedActions.Add(20, () =>
+        {
+            SwapFace(_monkeFaceRenderer, _defaultFaceMaterial);
+            _mouseFallingAnimator.SetTrigger("Idle");
+        });
+
+        _timedActions.Add(21, () =>
+        {
+            SetPosition(_cameraTransform, new Vector3(1f, 1.2f, -3.5f));
+            Destroy(_bubi);
+            Destroy(_mouseFalling.gameObject);
+        });
+
+        _timedActions.Add(24, () =>
+        {
+            SwapFace(_monkeFaceRenderer, _scaredFaceMaterial);
+        });
+
+        _timedActions.Add(25, () =>
+        {
+            SetText(LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "INTRO_DIALOGUE_WAIT"));
+        });
+
+        _timedActions.Add(27, () =>
+        {
+           SetText(LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "INTRO_DIALOGUE_WARNING"));
+           //Move camera
+           //Move mouse surfer 2
+        });
+
+        _timedActions.Add(29, () =>
+        {
+            //Move camera
+            //Waterfall??
         });
         
     }
@@ -94,6 +151,17 @@ public class IntroManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         _transform.position = position;
+    }
+
+    private IEnumerator MoveLocal(Transform _transform, Vector3 position, float speed)
+    {
+        Vector3 direction = (position - _transform.localPosition).normalized;
+        while (Vector3.Distance(_transform.localPosition, position) >= 0.05f)
+        {
+            _transform.localPosition += direction * (Time.deltaTime * speed);
+            yield return new WaitForFixedUpdate();
+        }
+        _transform.localPosition = position;
     }
 
     private void SetPosition(Transform _transform, Vector3 position)
