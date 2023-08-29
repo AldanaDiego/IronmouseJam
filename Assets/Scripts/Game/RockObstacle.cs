@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RockObstacle : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _explosionEffect;
+    [SerializeField] private Renderer _renderer;
+
     private float MovementSpeed;
     private Transform _transform;
     private SFXManager _sfxManager;
@@ -43,8 +46,9 @@ public class RockObstacle : MonoBehaviour
         {
             _hasCollided = true;
             _sfxManager.PlayObstacleHit();
-            //TODO trigger VFX
-            Destroy(gameObject);
+            _explosionEffect.Play();
+            _renderer.enabled = false;
+            Destroy(gameObject, 1f);
         }
     }
 }
