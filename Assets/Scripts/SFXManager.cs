@@ -36,7 +36,7 @@ public class SFXManager : Singleton<SFXManager>
 
     public void PlayObstacleHit()
     {
-        _audioSource.PlayOneShot(_obstacleHit);
+        _audioSource.PlayOneShot(_obstacleHit, 0.5f);
     }
 
     public void PlayJumpStart()

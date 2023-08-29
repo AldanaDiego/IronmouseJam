@@ -66,6 +66,18 @@ MonoBehaviour:
     m_Localized: '- That''s Bubi!'
     m_Metadata:
       m_Items: []
+  - m_Id: 3555258118004736
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555326602600448
+    m_Localized: Music Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555410916499456
+    m_Localized: Sounds Volume
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

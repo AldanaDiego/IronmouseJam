@@ -66,6 +66,18 @@ MonoBehaviour:
     m_Localized: "- \xA1Es Bubi!"
     m_Metadata:
       m_Items: []
+  - m_Id: 3555258118004736
+    m_Localized: Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555326602600448
+    m_Localized: "Volumen de M\xFAsica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555410916499456
+    m_Localized: Volumen de Sonidos
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

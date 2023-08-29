@@ -63,6 +63,18 @@ MonoBehaviour:
     m_Key: INTRO_DIALOGUE_BUBI
     m_Metadata:
       m_Items: []
+  - m_Id: 3555258118004736
+    m_Key: TITLE_SETTINGS_LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555326602600448
+    m_Key: TITLE_SETTINGS_MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3555410916499456
+    m_Key: TITLE_SETTINGS_SFX
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
