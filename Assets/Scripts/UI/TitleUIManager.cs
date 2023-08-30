@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class TitleUIManager : MonoBehaviour
     [SerializeField] private GameObject _settingsMenu;
 
     private SFXManager _sfxManager;
+    private InputManager _inputManager;
     private Button[] _titleButtons;
     private Button[] _difficultyButtons;
     private ButtonGroupNavigation _buttonGroupNavigation;
@@ -17,6 +19,8 @@ public class TitleUIManager : MonoBehaviour
     private void Start()
     {
         _sfxManager = SFXManager.GetInstance();
+        _inputManager = InputManager.GetInstance();
+        _inputManager.OnCancelActionPerformed += OnCancelActionPerformed;
         _difficultyButtonMenu.SetActive(false);
         _settingsMenu.SetActive(false);
         _titleButtons = _titleButtonMenu.GetComponentsInChildren<Button>();
@@ -58,5 +62,15 @@ public class TitleUIManager : MonoBehaviour
         _settingsMenu.SetActive(false);
         _titleButtonMenu.SetActive(true);
         _buttonGroupNavigation.Setup(_titleButtons);
+    }
+
+    private void OnCancelActionPerformed(object sender, EventArgs empty)
+    {
+        OnButtonBackClicked();
+    }
+
+    private void OnDestroy()
+    {
+        _inputManager.OnCancelActionPerformed -= OnCancelActionPerformed;
     }
 }

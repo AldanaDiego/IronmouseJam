@@ -163,7 +163,10 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
+        _stageProgress.OnStageClear -= OnStageClear;
+        _stageProgress.OnStageRestart -= OnStageRestart;
+        _stageProgress.OnStageDeath -= OnStageDeath;
+        _stageProgress.OnEnemySpawn -= OnEnemySpawn;
         _enemyCollision.OnEnemyCollision -= OnEnemyCollision;
-        _stageProgress.OnStageRestart += OnStageRestart;
     }
 }

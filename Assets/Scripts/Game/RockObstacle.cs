@@ -40,6 +40,11 @@ public class RockObstacle : MonoBehaviour
         _isMoving = true;
     }
 
+    public bool CanCollide()
+    {
+        return !_hasCollided;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!_hasCollided && (other.tag == "Player" || other.tag == "Board" || other.tag == "Enemy"))

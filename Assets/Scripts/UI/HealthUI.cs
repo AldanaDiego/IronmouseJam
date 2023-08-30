@@ -39,6 +39,6 @@ public class HealthUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        _playerHealth.OnHealthChanged += OnHealthChanged;
+        _playerHealth.OnHealthChanged -= OnHealthChanged;
     }
 }
