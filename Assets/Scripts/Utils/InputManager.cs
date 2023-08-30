@@ -8,6 +8,7 @@ public class InputManager : Singleton<InputManager>
 {
     private PlayerInput _playerInput;
     public event EventHandler OnOkActionPerformed;
+    public event EventHandler<Vector2> OnMoveActionPerformed;
 
     protected override void Awake()
     {
@@ -16,6 +17,7 @@ public class InputManager : Singleton<InputManager>
         _playerInput = new PlayerInput();
         _playerInput.Enable();
         _playerInput.PlayerActionMap.OkAction.performed += OnOkAction;
+        _playerInput.PlayerActionMap.Move.performed += OnMoveAction;
     }
 
     public Vector2 GetPlayerMovement()
@@ -27,5 +29,10 @@ public class InputManager : Singleton<InputManager>
     public void OnOkAction(InputAction.CallbackContext context)
     {
         OnOkActionPerformed?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void OnMoveAction(InputAction.CallbackContext context)
+    {
+        OnMoveActionPerformed?.Invoke(this, context.ReadValue<Vector2>());
     }
 }
