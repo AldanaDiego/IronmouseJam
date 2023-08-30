@@ -7,6 +7,7 @@ public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform _playerTransform;
+    private PauseManager _pauseManager;
     private InputManager _inputManager;
     private StageProgress _stageProgress;
     private PlayerHealth _playerHealth;
@@ -17,6 +18,7 @@ public class PlayerJump : MonoBehaviour
     private const float JUMP_COOLDOWN = 0.2f;
     private bool _isJumping = false;
     private bool _isCooldown = false;
+    private bool _previousCanJump;
     private bool _canJump = true;
     private float _jumpTimer;
     private float _cooldownTimer;
@@ -32,6 +34,8 @@ public class PlayerJump : MonoBehaviour
         _stageProgress.OnStageRestart += OnStageRestart;
         _playerHealth = GetComponent<PlayerHealth>();
         _playerHealth.OnPlayerDeath += OnPlayerDeath;
+        _pauseManager = PauseManager.GetInstance();
+        _pauseManager.OnPauseStatusChanged += OnPauseStatusChanged;
     }
 
     private void Update()
@@ -91,6 +95,19 @@ public class PlayerJump : MonoBehaviour
     private void OnPlayerDeath(object sender, EventArgs empty)
     {
         _canJump = false;
+    }
+
+    private void OnPauseStatusChanged(object sender, bool isPaused)
+    {
+        if (isPaused)
+        {
+            _previousCanJump = _canJump;
+            _canJump = false;
+        }
+        else
+        {
+            _canJump = _previousCanJump;
+        }
     }
 
     private void OnDestroy()

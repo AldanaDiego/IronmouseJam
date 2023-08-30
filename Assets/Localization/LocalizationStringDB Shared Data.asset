@@ -75,6 +75,14 @@ MonoBehaviour:
     m_Key: TITLE_SETTINGS_SFX
     m_Metadata:
       m_Items: []
+  - m_Id: 3914537433915392
+    m_Key: GAME_BUTTON_RESUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3914650113892352
+    m_Key: GAME_BUTTON_EXIT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
