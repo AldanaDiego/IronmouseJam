@@ -8,11 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private const float MOVEMENT_SPEED = 8f;
 
     public event EventHandler OnPlayerMovedAway;
-    
+
+    private PauseManager _pauseManager;
     private InputManager _inputManager;
     private StageProgress _stageProgress;
     private PlayerHealth _playerHealth;
     private Transform _transform;
+    private bool _previousCanMove;
     private bool _canMove = true;
     private float _movementBoundHorizontal;
     private float _movementBoundVertical;
@@ -29,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
         _stageProgress.OnStageRestart += OnStageRestart;
         _playerHealth = GetComponent<PlayerHealth>();
         _playerHealth.OnPlayerDeath += OnPlayerDeath;
+        _pauseManager = PauseManager.GetInstance();
+        _pauseManager.OnPauseStatusChanged += OnPauseStatusChanged;
     }
 
     private void Update()
@@ -75,6 +79,19 @@ public class PlayerMovement : MonoBehaviour
     private void OnPlayerDeath(object sender, EventArgs empty)
     {
         _canMove = false;
+    }
+
+    private void OnPauseStatusChanged(object sender, bool isPaused)
+    {
+        if (isPaused)
+        {
+            _previousCanMove = _canMove;
+            _canMove = false;
+        }
+        else
+        {
+            _canMove = _previousCanMove;
+        }
     }
 
     private void OnDestroy()

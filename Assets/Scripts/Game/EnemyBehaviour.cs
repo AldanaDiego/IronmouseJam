@@ -16,10 +16,12 @@ public class EnemyBehaviour : MonoBehaviour
     private const float MOVEMENT_SPEED = 5f;
     private const float ELASTIC_FACTOR = (1f * ((float) Math.PI)) / 3f;
 
+    private PauseManager _pauseManager;
     private Transform _player;
     private StageProgress _stageProgress;
     private Transform _transform;
     private Vector3 _enemyDefaultLocalPosition;
+    private bool _previousIsActive;
     private bool _isActive = false;
     private float _spawnStartPosition;
     private float _activePosition;
@@ -27,6 +29,8 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         _collider.enabled = false;
+        _pauseManager = PauseManager.GetInstance();
+        _pauseManager.OnPauseStatusChanged += OnPauseStatusChanged;
         _stageProgress = StageProgress.GetInstance();
         _stageProgress.OnStageClear += OnStageClear;
         _stageProgress.OnStageRestart += OnStageRestart;
@@ -159,6 +163,19 @@ public class EnemyBehaviour : MonoBehaviour
     private void OnEnemySpawn(object sender, EventArgs empty)
     {
         StartCoroutine(EnterStage());
+    }
+
+    private void OnPauseStatusChanged(object sender, bool isPaused)
+    {
+        if (isPaused)
+        {
+            _previousIsActive = _isActive;
+            _isActive = false;
+        }
+        else
+        {
+            _isActive = _previousIsActive;
+        }
     }
 
     private void OnDestroy()
