@@ -21,6 +21,7 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 - [2D Casual UI HD](https://assetstore.unity.com/packages/2d/gui/icons/2d-casual-ui-hd-82080) by MiMU STUDIO
 - [Swash Font](https://fontesk.com/swash-font/) by MJ Type
 - [New Boba Font](https://fontesk.com/new-boba-font/) by Syafrizal a.k.a. Khurasan
+- [Input Buttons](https://greenpixels.itch.io/pixel-art-asset-3) by greenpixels_
 
 ### Music and SFX
 - [30+ FREE Catchy Beat 'Em Up Music Pack](https://assetstore.unity.com/packages/audio/music/30-free-catchy-beat-em-up-music-pack-254121) by Melodic Purposes

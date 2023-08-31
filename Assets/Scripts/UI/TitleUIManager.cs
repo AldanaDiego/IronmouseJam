@@ -9,6 +9,7 @@ public class TitleUIManager : MonoBehaviour
     [SerializeField] private GameObject _titleButtonMenu;
     [SerializeField] private GameObject _difficultyButtonMenu;
     [SerializeField] private GameObject _settingsMenu;
+    [SerializeField] private GameObject _controlsMenu;
 
     private SFXManager _sfxManager;
     private InputManager _inputManager;
@@ -23,6 +24,7 @@ public class TitleUIManager : MonoBehaviour
         _inputManager.OnCancelActionPerformed += OnCancelActionPerformed;
         _difficultyButtonMenu.SetActive(false);
         _settingsMenu.SetActive(false);
+        _controlsMenu.SetActive(false);
         _titleButtons = _titleButtonMenu.GetComponentsInChildren<Button>();
         _difficultyButtons = _difficultyButtonMenu.GetComponentsInChildren<Button>();
         _buttonGroupNavigation = GetComponent<ButtonGroupNavigation>();
@@ -45,6 +47,14 @@ public class TitleUIManager : MonoBehaviour
         _settingsMenu.SetActive(true);
     }
 
+    public void OnButtonControlsClicked()
+    {
+        _sfxManager.PlayButtonClicked();
+        _buttonGroupNavigation.SetActive(false);
+        _titleButtonMenu.SetActive(false);
+        _controlsMenu.SetActive(true);
+    }
+
     public void OnButtonExitClicked()
     {
         _sfxManager.PlayButtonClicked();
@@ -60,6 +70,7 @@ public class TitleUIManager : MonoBehaviour
         _sfxManager.PlayButtonClicked();
         _difficultyButtonMenu.SetActive(false);
         _settingsMenu.SetActive(false);
+        _controlsMenu.SetActive(false);
         _titleButtonMenu.SetActive(true);
         _buttonGroupNavigation.Setup(_titleButtons);
     }

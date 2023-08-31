@@ -253,6 +253,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""CancelAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""888d6b15-793d-4b0a-bea8-a419fd58b60e"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }

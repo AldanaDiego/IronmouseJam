@@ -87,6 +87,34 @@ MonoBehaviour:
     m_Key: WIN_CLEARED
     m_Metadata:
       m_Items: []
+  - m_Id: 4294117890023424
+    m_Key: TITLE_BUTTON_CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4294778467737600
+    m_Key: TITLE_CONTROLS_MOVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4294839176093696
+    m_Key: TITLE_CONTROLS_JUMP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4294979517505536
+    m_Key: TITLE_CONTROLS_BACK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4300995411927040
+    m_Key: TITLE_CONTROLS_OPTION1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4301072671006720
+    m_Key: TITLE_CONTROLS_OPTION2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4301135057084416
+    m_Key: TITLE_CONTROLS_CONTROLLER
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

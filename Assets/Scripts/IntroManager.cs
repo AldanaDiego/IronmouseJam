@@ -133,13 +133,13 @@ public class IntroManager : MonoBehaviour
             _cameraTransform.rotation = Quaternion.Euler(-30f, -85f, 0f);
             SetPosition(_surfer2, new Vector3(-42f, 1.7f, 0f));
             _surfer2.rotation = Quaternion.Euler(0f, 0f, 10f);
-            StartCoroutine(Move(_surfer2, new Vector3(-39f, 1.7f, 0f), 2f));
+            StartCoroutine(Move(_surfer2, new Vector3(-37f, 1.7f, 0f), 2f));
         });
 
         _timedActions.Add(30, () =>
         {
             SetText(LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "INTRO_DIALOGUE_BUBI"));
-            StartCoroutine(Move(_surfer2, new Vector3(-35f, -1f, 0f), 2f));
+            StartCoroutine(Move(_surfer2, new Vector3(-36f, -1f, 0f), 2f));
         });
 
         _timedActions.Add(32, () =>

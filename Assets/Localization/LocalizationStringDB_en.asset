@@ -90,6 +90,34 @@ MonoBehaviour:
     m_Localized: Cleared!
     m_Metadata:
       m_Items: []
+  - m_Id: 4294117890023424
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4294778467737600
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4294839176093696
+    m_Localized: Jump/Ok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4294979517505536
+    m_Localized: Pause/Back
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4300995411927040
+    m_Localized: Option 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4301072671006720
+    m_Localized: Option 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4301135057084416
+    m_Localized: Controller
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
