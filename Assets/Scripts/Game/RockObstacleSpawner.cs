@@ -14,11 +14,16 @@ public class RockObstacleSpawner : MonoBehaviour
     private float _spawnPosition = 12f;
     private bool _isActive = false;
     private float _cooldownTimer = 0f;
+    private bool _stageHalfway;
+    
     private float SpawnCooldown;
+    private float MultipleObstacleChance;
 
     private void Start()
     {
-        SpawnCooldown = DifficultySettings.GetInstance().GetObstacleSpawnCooldown();
+        DifficultySettings difficultySettings = DifficultySettings.GetInstance();
+        SpawnCooldown = difficultySettings.GetObstacleSpawnCooldown();
+        MultipleObstacleChance = difficultySettings.GetMultipleObstacleChance();
         Vector2 bounds = GameBounds.GetInstance().GetScreenBounds();
         _upperBound = bounds.y;
         _lowerBound = bounds.y * -1;
@@ -37,19 +42,45 @@ public class RockObstacleSpawner : MonoBehaviour
             _cooldownTimer += Time.deltaTime;
             if (_cooldownTimer >= SpawnCooldown)
             {
-                RockObstacle rock = Instantiate(
-                    _rockPrefab,
-                    new Vector3(
-                        _spawnPosition,
-                        0f,
-                        Mathf.RoundToInt(UnityEngine.Random.Range(_lowerBound, _upperBound))
-                    ),
-                    Quaternion.identity
-                );
-                rock.Setup(_leftBound);
+                bool isMultiple = UnityEngine.Random.value < MultipleObstacleChance;
+                int position = Mathf.RoundToInt(UnityEngine.Random.Range(_lowerBound, _upperBound));
+                if (isMultiple)
+                {
+                    SpawnObstacle(position);
+                    int offset = RandomChoice(2, Mathf.RoundToInt((_upperBound - _lowerBound) / 2) ) * RandomChoice(1, -1);
+                    int secondPosition = position + offset;
+                    if (secondPosition < _lowerBound || secondPosition > _upperBound)
+                    {
+                        secondPosition = position - offset;
+                    }
+                    SpawnObstacle(secondPosition);
+                }
+                else
+                {
+                    SpawnObstacle(position);
+                }
                 _cooldownTimer = 0f;
             }
         }    
+    }
+
+    private void SpawnObstacle(int position)
+    {
+        RockObstacle rock = Instantiate(
+            _rockPrefab,
+            new Vector3(
+                _spawnPosition,
+                0f,
+                position
+            ),
+            Quaternion.identity
+        );
+        rock.Setup(_leftBound);
+    }
+
+    private int RandomChoice(int value1, int value2)
+    {
+        return UnityEngine.Random.value <= 0.5f ? value1 : value2;
     }
 
     private void OnStageClear(object sender, EventArgs empty)

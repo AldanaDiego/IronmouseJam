@@ -6,7 +6,7 @@ public class DifficultySettings : Singleton<DifficultySettings>
 {
     private const int ULTIMATE = (int) Consts.Difficulties.ULTIMATE;
     private const int HARD = (int) Consts.Difficulties.HARD;
-    private const int NORMAL = (int) Consts.Difficulties.NORMAL;
+    //private const int NORMAL = (int) Consts.Difficulties.NORMAL;
 
     public float GetBulletSpeed()
     {
@@ -14,7 +14,7 @@ public class DifficultySettings : Singleton<DifficultySettings>
         {
             ULTIMATE => 10.5f,
             HARD => 8.5f,
-            _ => 6.5f,
+            _ => 7f,
         };
     }
 
@@ -24,7 +24,7 @@ public class DifficultySettings : Singleton<DifficultySettings>
         {
             ULTIMATE => 2f,
             HARD => 3.5f,
-            _ => 4.5f
+            _ => 4f
         };
     }
 
@@ -34,7 +34,7 @@ public class DifficultySettings : Singleton<DifficultySettings>
         {
             ULTIMATE => 13f,
             HARD => 10f,
-            _ => 7f
+            _ => 8.5f
         };
     }
 
@@ -43,8 +43,8 @@ public class DifficultySettings : Singleton<DifficultySettings>
         return PlayerPrefs.GetInt("Difficulty") switch
         {
             ULTIMATE => 2.5f,
-            HARD => 3f,
-            _ => 3.5f
+            HARD => 2.75f,
+            _ => 3.25f
         };
     }
 
@@ -65,6 +65,16 @@ public class DifficultySettings : Singleton<DifficultySettings>
             ULTIMATE => 3f,
             HARD => 15f,
             _ => 25f
+        };
+    }
+
+    public float GetMultipleObstacleChance()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 0.45f,
+            HARD => 0.2f,
+            _ => 0f
         };
     }
 }
