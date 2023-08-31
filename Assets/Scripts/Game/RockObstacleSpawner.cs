@@ -8,6 +8,7 @@ public class RockObstacleSpawner : MonoBehaviour
     [SerializeField] private RockObstacle _rockPrefab;
 
     private StageProgress _stageProgress;
+    private DifficultySettings _difficultySettings;
     private float _upperBound;
     private float _lowerBound;
     private float _leftBound;
@@ -18,12 +19,14 @@ public class RockObstacleSpawner : MonoBehaviour
     
     private float SpawnCooldown;
     private float MultipleObstacleChance;
+    private float FullObstacleChance;
 
     private void Start()
     {
-        DifficultySettings difficultySettings = DifficultySettings.GetInstance();
-        SpawnCooldown = difficultySettings.GetObstacleSpawnCooldown();
-        MultipleObstacleChance = difficultySettings.GetMultipleObstacleChance();
+        _difficultySettings = DifficultySettings.GetInstance();
+        SpawnCooldown = _difficultySettings.GetObstacleSpawnCooldown();
+        MultipleObstacleChance = _difficultySettings.GetMultipleObstacleChance();
+        FullObstacleChance = _difficultySettings.GetFullObstacleChance();
         Vector2 bounds = GameBounds.GetInstance().GetScreenBounds();
         _upperBound = bounds.y;
         _lowerBound = bounds.y * -1;
@@ -33,6 +36,7 @@ public class RockObstacleSpawner : MonoBehaviour
         _stageProgress.OnStageClear += OnStageClear;
         _stageProgress.OnStageRestart += OnStageRestart;
         _stageProgress.OnStageDeath += OnStageDeath;
+        _stageProgress.OnStageHalfway += OnStageHalfway;
     }
 
     private void Update()
@@ -46,14 +50,25 @@ public class RockObstacleSpawner : MonoBehaviour
                 int position = Mathf.RoundToInt(UnityEngine.Random.Range(_lowerBound, _upperBound));
                 if (isMultiple)
                 {
-                    SpawnObstacle(position);
-                    int offset = RandomChoice(2, Mathf.RoundToInt((_upperBound - _lowerBound) / 2) ) * RandomChoice(1, -1);
-                    int secondPosition = position + offset;
-                    if (secondPosition < _lowerBound || secondPosition > _upperBound)
+                    bool isFull = UnityEngine.Random.value < FullObstacleChance;
+                    if (isFull)
                     {
-                        secondPosition = position - offset;
+                        for (int i = Mathf.CeilToInt(_lowerBound); i <= Mathf.FloorToInt(_upperBound); i += 2)
+                        {
+                            SpawnObstacle(i);
+                        }
                     }
-                    SpawnObstacle(secondPosition);
+                    else
+                    {
+                        SpawnObstacle(position);
+                        int offset = RandomChoice(2, Mathf.RoundToInt((_upperBound - _lowerBound) / 2) ) * RandomChoice(1, -1);
+                        int secondPosition = position + offset;
+                        if (secondPosition < _lowerBound || secondPosition > _upperBound)
+                        {
+                            secondPosition = position - offset;
+                        }
+                        SpawnObstacle(secondPosition);
+                    }
                 }
                 else
                 {
@@ -90,6 +105,8 @@ public class RockObstacleSpawner : MonoBehaviour
 
     private void OnStageRestart(object sender, EventArgs empty)
     {
+        MultipleObstacleChance = _difficultySettings.GetMultipleObstacleChance();
+        FullObstacleChance = _difficultySettings.GetFullObstacleChance();
         _isActive = true;
     }
 
@@ -98,10 +115,17 @@ public class RockObstacleSpawner : MonoBehaviour
         _isActive = false;
     }
 
+    private void OnStageHalfway(object sender, EventArgs empty)
+    {
+        MultipleObstacleChance = _difficultySettings.GetHalfwayMultipleObstacleChance();
+        FullObstacleChance = _difficultySettings.GetHalfwayFullObstacleChance();
+    }
+
     private void OnDestroy()
     {
         _stageProgress.OnStageClear -= OnStageClear;
         _stageProgress.OnStageRestart -= OnStageRestart;
         _stageProgress.OnStageDeath -= OnStageDeath;
+        _stageProgress.OnStageHalfway -= OnStageHalfway;
     }
 }

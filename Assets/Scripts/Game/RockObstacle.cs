@@ -16,6 +16,7 @@ public class RockObstacle : MonoBehaviour
 
     private void Start()
     {
+        _hasCollided = false;
         _sfxManager = SFXManager.GetInstance();
         MovementSpeed = DifficultySettings.GetInstance().GetRockObstacleSpeed();  
     }

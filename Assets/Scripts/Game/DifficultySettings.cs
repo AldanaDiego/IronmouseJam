@@ -73,8 +73,38 @@ public class DifficultySettings : Singleton<DifficultySettings>
     {
         return PlayerPrefs.GetInt("Difficulty") switch
         {
-            ULTIMATE => 0.45f,
-            HARD => 0.2f,
+            ULTIMATE => 0.6f,
+            HARD => 0.4f,
+            _ => 0f
+        };
+    }
+
+    public float GetHalfwayMultipleObstacleChance()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 1f,
+            HARD => 0.8f,
+            _ => 0f
+        };
+    }
+
+    public float GetFullObstacleChance()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 0.1f,
+            HARD => 0f,
+            _ => 0f
+        };
+    }
+
+    public float GetHalfwayFullObstacleChance()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => 0.3f,
+            HARD => 0.1f,
             _ => 0f
         };
     }

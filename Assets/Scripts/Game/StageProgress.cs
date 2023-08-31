@@ -12,6 +12,7 @@ public class StageProgress : Singleton<StageProgress>
 
     public event EventHandler OnStageRestart;
     public event EventHandler OnStageClear;
+    public event EventHandler OnStageHalfway;
     public event EventHandler OnStageDeath;
     public event EventHandler OnEnemySpawn;
 
@@ -23,6 +24,7 @@ public class StageProgress : Singleton<StageProgress>
     private float _enemyTimer;
     private bool _hasEnemySpawned;
     private bool _isActive;
+    private bool _hasReachedHalfway;
 
     private void Start()
     {
@@ -36,6 +38,7 @@ public class StageProgress : Singleton<StageProgress>
         _stageTimer = 0f;
         _enemyTimer = 0f;
         _hasEnemySpawned = false;
+        _hasReachedHalfway = false;
         _isActive = true;
     }
 
@@ -45,6 +48,11 @@ public class StageProgress : Singleton<StageProgress>
         {
             _stageTimer += Time.deltaTime;
             _enemyTimer += Time.deltaTime;
+            if (!_hasReachedHalfway && _stageTimer >= StageTotalTime / 2)
+            {
+                _hasReachedHalfway = true;
+                OnStageHalfway?.Invoke(this, EventArgs.Empty);
+            }
             if (_stageTimer >= StageTotalTime)
             {
                 _isActive = false;
@@ -82,6 +90,7 @@ public class StageProgress : Singleton<StageProgress>
         _stageTimer = 0f;
         _enemyTimer = 0f;
         _hasEnemySpawned = false;
+        _hasReachedHalfway = false;
         StartCoroutine(RestartGame());
     }
 

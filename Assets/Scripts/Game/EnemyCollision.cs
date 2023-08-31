@@ -12,7 +12,7 @@ public class EnemyCollision : MonoBehaviour
         if (other.tag == "Obstacle")
         {
             if (other.GetComponent<RockObstacle>().CanCollide())
-            {
+            {      
                 OnEnemyCollision?.Invoke(this, EventArgs.Empty);
             }
         }
