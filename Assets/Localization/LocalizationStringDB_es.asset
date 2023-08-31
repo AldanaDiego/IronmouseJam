@@ -86,6 +86,10 @@ MonoBehaviour:
     m_Localized: Volver a Inicio
     m_Metadata:
       m_Items: []
+  - m_Id: 4235004048924672
+    m_Localized: Completado!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

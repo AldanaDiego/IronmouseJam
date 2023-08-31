@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 
 public class DifficultySettings : Singleton<DifficultySettings>
 {
@@ -75,6 +76,16 @@ public class DifficultySettings : Singleton<DifficultySettings>
             ULTIMATE => 0.45f,
             HARD => 0.2f,
             _ => 0f
+        };
+    }
+
+    public string GetDifficultyString()
+    {
+        return PlayerPrefs.GetInt("Difficulty") switch
+        {
+            ULTIMATE => LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "TITLE_DIFFICULTY_ULTIMATE"),
+            HARD => LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "TITLE_DIFFICULTY_HARD"),
+            _ => LocalizationSettings.StringDatabase.GetLocalizedString("LocalizationStringDB", "TITLE_DIFFICULTY_NORMAL")
         };
     }
 }

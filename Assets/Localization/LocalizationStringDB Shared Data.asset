@@ -83,6 +83,10 @@ MonoBehaviour:
     m_Key: GAME_BUTTON_EXIT
     m_Metadata:
       m_Items: []
+  - m_Id: 4235004048924672
+    m_Key: WIN_CLEARED
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
