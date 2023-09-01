@@ -4,6 +4,8 @@ Game made in Unity for Ironmouse's Mouse Jam 2023
 - `Mouse Jam`: https://itch.io/jam/mouse-jam-2023
 
 ## About the game
+- Help Ironmouse reach the goal avoiding the obstacles!
+- Choose between 3 difficulty levels
 
 ## Credits
 
