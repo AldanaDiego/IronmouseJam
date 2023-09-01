@@ -11491,12 +11491,12 @@ PrefabInstance:
     - target: {fileID: 222500335128183257, guid: b7c0396558fb6654d93a38880c29e68f,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 222500335128183257, guid: b7c0396558fb6654d93a38880c29e68f,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 222500335128183257, guid: b7c0396558fb6654d93a38880c29e68f,
         type: 3}
@@ -11562,6 +11562,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShapeTransitionImage
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789265753319945671, guid: b7c0396558fb6654d93a38880c29e68f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789265753319945671, guid: b7c0396558fb6654d93a38880c29e68f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789265753319945671, guid: b7c0396558fb6654d93a38880c29e68f,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789265753319945671, guid: b7c0396558fb6654d93a38880c29e68f,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789265753319945671, guid: b7c0396558fb6654d93a38880c29e68f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 8789265753319945671, guid: b7c0396558fb6654d93a38880c29e68f,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 450
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

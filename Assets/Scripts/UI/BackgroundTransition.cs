@@ -12,11 +12,13 @@ public class BackgroundTransition : MonoBehaviour
     [SerializeField] private bool _useCuttoffExit = false;
 
     private SceneTransitionManager _sceneManager;
+    private RectTransform _backgroundRectTransform;
     private const float TRANSITION_TIME = 0.75f;
     private const float MAX_CUTOFF_SIZE = 1500f;
 
     private void Start()
     {
+        _backgroundRectTransform = _backgroundImage.GetComponent<RectTransform>();
         _sceneManager = SceneTransitionManager.GetInstance();
         _sceneManager.OnSceneChanging += OnSceneChanging;
 
@@ -25,6 +27,7 @@ public class BackgroundTransition : MonoBehaviour
 
     public IEnumerator EnterScene()
     {
+        _backgroundRectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
         if (_useCuttoffEnter)
         {
             SetCutoffSize(0f);
@@ -53,6 +56,7 @@ public class BackgroundTransition : MonoBehaviour
 
     public IEnumerator ExitScene()
     {
+        _backgroundRectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
         if (_useCuttoffExit)
         {
             SetCutoffSize(MAX_CUTOFF_SIZE);

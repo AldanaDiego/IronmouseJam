@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: 9f0f684a8b2f1924ea7d49774204593a
+  - enabled: 1
+    path: Assets/Scenes/WinnerScene.unity
+    guid: 71213095c6d7d20418b99d5600337514
+  - enabled: 1
+    path: Assets/Scenes/IntroScene.unity
+    guid: c05e1ec541020b54fa26cefac3f7e88a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 681e609e4637a9948a3e0197da0efe3c,
       type: 2}

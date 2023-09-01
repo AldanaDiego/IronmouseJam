@@ -56,7 +56,7 @@ Material:
     - _FoamDensity: 5
     - _FoamSpeed: 5
     - _FoamThickness: 2
-    - _LavaHeight: 0
+    - _LavaHeight: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
