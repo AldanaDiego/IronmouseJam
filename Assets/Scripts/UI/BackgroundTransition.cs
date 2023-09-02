@@ -28,11 +28,11 @@ public class BackgroundTransition : MonoBehaviour
     public IEnumerator EnterScene()
     {
         _backgroundRectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+        SetCutoffSize(0f);
+        _backgroundImage.alpha = 1f;
+
         if (_useCuttoffEnter)
         {
-            SetCutoffSize(0f);
-            _backgroundImage.alpha = 1f;
-            
             for (float i = 0; i< 1; i += Time.deltaTime / TRANSITION_TIME)
             {
                 SetCutoffSize(Mathf.Lerp(0f, MAX_CUTOFF_SIZE, i));
@@ -43,7 +43,6 @@ public class BackgroundTransition : MonoBehaviour
         }
         else
         {
-            _backgroundImage.alpha = 1f;
             yield return new WaitForSeconds(0.1f);
             for (float i = 0; i < 1; i += Time.deltaTime / TRANSITION_TIME)
             {
@@ -71,6 +70,7 @@ public class BackgroundTransition : MonoBehaviour
         }
         else
         {
+            SetCutoffSize(0f);
             _backgroundImage.alpha = 0f;
             _backgroundImage.gameObject.SetActive(true);
             for (float i = 0; i< 1; i += Time.deltaTime / TRANSITION_TIME)
